@@ -22,3 +22,6 @@ git add -A //(prepares all files for a commit)
 git commit -m "message here"  //(commits all files to local repository)
 
 git push origin master //(merges the local repository with the remote repository that everyone sees)
+
+
+HEYOO!!!

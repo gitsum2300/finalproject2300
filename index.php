@@ -11,6 +11,9 @@
 </head>
 <body>
     <?php
+        include('upload.php');
+    
+    /*
         if(!isset($_SESSION['user'])){
             include("userlogin.php"); //create this page
         }else{
@@ -18,6 +21,8 @@
         }
         
         include("footer.php"); //create this page
+        */
     ?>
 </body>
+</html>
    

@@ -15,7 +15,7 @@
     Release Year: <select name="releaseYear">
         <?php
             $year= date('Y');
-            for($j=$year;$j>=1960;$j++){
+            for($j=$year;$j>=1960;$j--){
                 print("<option value=\"$j\"> $j</option>");
             }
         ?>
@@ -25,14 +25,16 @@
         <option value="needsWork">Needs Work</option>
         <option value="bad">Bad</option>
     </select></br>
-    Concerts Performed At: <select name="concert">
-        for($j=1;$j<=$albums->num_rows;$j++){
-            $concerts= $mysqli->query('SELECT * FROM concerts');
-            $row= $concerts->fetch_assoc();
-            print("<option value=\"$row[concertid]\"> $row[concertName]</option>");
-        }
-    </select></br>
-    Active: <input type="radio" name="active" value="yes" checked>Yes</br>
+    <?php /*Concerts Performed At: <select name="concert">
+        <?php
+            for($j=1;$j<=$albums->num_rows;$j++){
+                $concerts= $mysqli->query('SELECT * FROM concerts');
+                $row= $concerts->fetch_assoc();
+                print("<option value=\"$row[concertid]\"> ".$row[concertName]."</option>");
+            }
+        ?>
+    </select></br> */ ?>
+    Active: <input type="radio" name="active" value="yes" checked>Yes
     <input type="radio" name="active" value="no" checked>No</br>
     Arrangement Structure: <select name="structure">
         <option value="4part">4-Part</option>
@@ -50,11 +52,14 @@
     Solo Range: <select name="soloRange">
         <option value=""></option>
     </select>
-    Album: <select name="album">
-        for($j=1;$j<=$albums->num_rows;$j++){
-            $albums= $mysqli->query('SELECT * FROM albums');
-            $row= $albums->fetch_assoc();
-            print("<option value=\"$row[albumid]\"> $row[albumName]</option>");
-        }
-    </select>
+    <?php /*Album: <select name="album">
+    <option value="null">None</option>
+        <?php
+            for($j=1;$j<=$albums->num_rows;$j++){
+                $albums= $mysqli->query('SELECT * FROM albums');
+                $row= $albums->fetch_assoc();
+                print('<option value="$row[albumid]">'.$row[albumName].'</option>');
+            }
+        ?>
+    </select>*/ ?>
 </form>

@@ -7,9 +7,12 @@
 <html>
 <head>
     <title> The Hangovers - Song Repertoire </title>
-    <link /> <!-- link to css pge here -->
+    <link href="main.css" rel="stylesheet" type="text/css" />
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Gentium+Basic:400,700' rel='stylesheet' type='text/css'>
 </head>
 <body>
+    <h1>the<span>HANGOVERS</span></h1>
     <?php
         include('upload.php');
     

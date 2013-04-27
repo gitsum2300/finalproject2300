@@ -7,6 +7,10 @@
 <html>
 <head>
     <title> The Hangovers - Song Repertoire </title>
+<<<<<<< HEAD
+    <link type= "text/css" rel="stylesheet" href="css/style.css" />
+=======
+>>>>>>> 3d0a8291e2f4e23cfaa664dd61f0cef30efdd384
     <link href="main.css" rel="stylesheet" type="text/css" />
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Gentium+Basic:400,700' rel='stylesheet' type='text/css'>

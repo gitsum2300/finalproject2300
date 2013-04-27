@@ -8,8 +8,12 @@
 <head>
     <title> The Hangovers - Song Repertoire </title>
     <link type= "text/css" rel="stylesheet" href="css/style.css" />
+    <link href="main.css" rel="stylesheet" type="text/css" />
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Gentium+Basic:400,700' rel='stylesheet' type='text/css'>
 </head>
 <body>
+    <h1>the<span>HANGOVERS</span></h1>
     <?php
 
         if(!isset($_SESSION['user'])){
@@ -24,9 +28,9 @@
             <a href="songUpload.php">Upload a Song</a>
             <a href="albumUpload.php">Upload an Album</a>
             <a href="concertUpload.php">Upload a Concert</a>
-        }
         
     <?php
+        }
         include("footer.php"); //Website footer - create this page
     ?>
 

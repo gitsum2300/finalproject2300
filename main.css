@@ -1,25 +1,27 @@
 h1 {
 	text-align: center;
-	font-family: 'Source Sans Pro', Verdana, Arial, Helvetica, sans-serif;
-	font-size: 2.5em;
-	color: #C0C0C0;
+	font-family: 'Boogaloo', cursive, Verdana, Arial, Helvetica, sans-serif;
+	font-size: 2.2em;
+	color: #FFFFFF;
+	margin: 0 0 0 0;
+	background-color: #20BDF1;
 }
 
 h1 span {
 	font-size: 2em;
-	color: #1B60FF;
+	color: #FFFFFF;
 }
 
 body {
-	font-family: 'Gentium Basic', Verdana, Arial, Helvetica, sans-serif;
-	font-weight: bold;
+	font-family: 'Source Sans Pro', Verdana, Arial, Helvetica, sans-serif;
 	background: #F4FFF4;
+	margin: 0 0 0 0;
 }
 
 table {
 	margin-left: auto;
 	margin-right: auto;
-	font-size: 1.5em;
+	font-size: 1.2em;
 }
 
 ::-webkit-input-placeholder {
@@ -43,14 +45,14 @@ table {
 	top: .1em;
 }
 
-.search {
-	text-align: right;
-	color: #531DFF;
+#search {
+	width: 20em;
+	font-size: 1em;
 	margin-right: .5em;
 }
 
-#sform {
-	width: 20em;
+#sortBy {
+	width: 7em;
 	font-size: 1em;
 	margin-right: .5em;
 }
@@ -65,4 +67,45 @@ table {
 	color: #FFFFFF;
 	font-size: .8em;
 	font-weight: bold;
+}
+
+/* ------------------------------
+#NAV adapted from woork.blogspot.com
+------------------------------ */
+
+#nav{
+	width: auto;
+	height: 36px;
+	background: #531DFF left top repeat-x;
+}
+
+#nav ul{
+	margin: 0 0 0 0;
+}
+
+#nav ul li{
+	float: left;
+	display: block;
+	line-height: 36px;
+}
+
+#nav ul li a{
+	color: #FFFFFF;
+	text-decoration: none;
+	font-weight: bold;
+	display: block;
+}
+
+#nav ul li a span{
+	padding: 0 20px 0 0;
+	height: 36px;
+	line-height: 36px;
+	display: block;
+	margin-left: 20px;
+}
+
+#nav ul li a:hover{
+	background: #2F09A6 left top no-repeat;
+	height: 36px;
+	line-height: 36px;
 }

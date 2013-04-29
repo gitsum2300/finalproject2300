@@ -25,8 +25,6 @@
         $song = $stmt->fetch_assoc();  //Turn the database result into an array
         
         //Print out the song name
-        //Print out album(s) the song was in
-        //Print out the artist(s)
         //Print out the structure
         //Print out the syllables
         //Print out the arranger

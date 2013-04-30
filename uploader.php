@@ -17,16 +17,31 @@
         include 'nav.php';
     ?>
     <h2>Administrator Tools</h2>
+	
+	<div id = "songForm">
     <h3>Song Upload</h3>
     <?php include("songUpload.php"); ?>
+	</div>
+	
+	<div id = "songForm">
     <h3>Create an Album</h3>
     <?php include("albumUpload.php"); ?>
+	</div>
+	
+	<div id = "songForm">
     <h3>Create a Concert</h3>
     <?php include("concertUpload.php"); ?>
+	</div>
+	
+	<div id = "songForm">
     <h3>Edit an Album</h3>
     <?php include("albumEdit.php"); ?>
+	</div>
+	
+	<div id = "songForm">
     <h3>Edit a Concert</h3>
     <?php include("concertEdit.php"); ?>
+	</div>
     
 </body>
 </html>

@@ -12,16 +12,15 @@ h1 span {
 	color: #FFFFFF;
 }
 
+h2 {
+	text-align: center;
+	color: #FA4B2A;
+}
+
 body {
 	font-family: 'Source Sans Pro', Verdana, Arial, Helvetica, sans-serif;
 	background: #F4FFF4;
 	margin: 0 0 0 0;
-}
-
-table {
-	margin-left: auto;
-	margin-right: auto;
-	font-size: 1.2em;
 }
 
 ::-webkit-input-placeholder {
@@ -45,10 +44,58 @@ table {
 	top: .1em;
 }
 
+.left {
+	float: left;
+	width: 60%;
+	border-style: solid;
+	border-width: .3em;
+	border-color: #FA4B2A;
+	margin: 4em 0 0 2em;
+}
+
+.right {
+	float: right;
+	width: 32%;
+	border-style: solid;
+	border-width: .3em;
+	border-color: #0074CB;
+	margin: 16em 2em 0 0;
+}
+
+.wrapper {
+	width: auto;
+}
+
+table {
+	font-size: 1.2em;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.left table {
+	height: 40%;
+}
+
+.right table {
+	height: 20%;
+}
+
 #search {
 	width: 20em;
 	font-size: 1em;
 	margin-right: .5em;
+}
+
+#advsubmit {
+	clear: both;
+	width: 6.5em;
+	height: 2.5em;
+	background: #531DFF;
+	text-align: center;
+	line-height: 2em;
+	color: #FFFFFF;
+	font-size: .8em;
+	font-weight: bold;
 }
 
 #sortBy {
@@ -68,6 +115,7 @@ table {
 	font-size: .8em;
 	font-weight: bold;
 }
+
 
 /* ------------------------------
 #NAV adapted from woork.blogspot.com
@@ -108,4 +156,70 @@ table {
 	background: #2F09A6 left top no-repeat;
 	height: 36px;
 	line-height: 36px;
+}
+
+#main{
+	left: -15px;
+	padding-top: 100px;
+	font-family: 'Gentium Basic', serif;
+}
+
+#albumCover{
+	margin: 5px;
+	padding: 5px;
+	border-radius: 0%;
+	width: 210px;
+	height: 210px;
+	background-color: blue;
+	float: left;
+}
+
+#albumCover img{
+	padding: 5px;
+	border-radius: 0%;
+}
+
+#basicSongInfo{
+	background-color: green;
+	border-radius: 0px;
+	width: 45%;
+	height: 200px;
+	margin: 5px;
+	padding: 10px;
+	float: left;
+}
+
+#additionalSongInfo{
+	background-color: blue;
+	border-radius: 0px;
+	width: 30%;
+	height: 100px;
+	margin: 5px;
+	padding: 5px;
+	float: left;
+}
+
+#login{
+	font-family: 'Gentium Basic', serif;
+	background-color: red;
+	width: 220px;
+	height: 155px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -110px;
+	margin-top: -95px;
+
+	-webkit-animation: login 1s ease-in-out;
+	-moz-animation: login 1s ease-in-out;
+	-ms-animation: login 1s ease-in-out;
+	-o-animation: login 1s ease-in-out;
+	animation: login 1s ease-in-out;
+}
+
+#songForm{
+	background-color: #F0F0F0;
+	padding: 10px;
+	border: 2px solid black;
+	margin: 5px;
 }

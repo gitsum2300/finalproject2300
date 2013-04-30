@@ -1,12 +1,23 @@
 <form id="songUpload" method="post" enctype="multipart/form-data">
-    <?php //text box for song title ?>
-    Song Title: <input type="text" name="songName" required></br>
+    <table>
+	<?php //text box for song title ?>
+    <tr>
+	<td>Song Title:	</td>
+	<td><input type="text" name="songName" required></td>
+	</tr>
     <?php //text box for artist ?>
-    Artist: <input type="text" name="artist" required></br>
+    <tr>
+	<td>Artist: </td>
+	<td><input type="text" name="artist" required></td>
+	</tr>
     <?php //text box for arrangers ?>
-    Arranger(s): <input type="text" name="arranger"> (separate multiple names by commas)</br>
+    <tr>
+	<td>Arranger(s): </td>
+	<td><input type="text" name="arranger"> (separate multiple names by commas)</td>
+	</tr>
     <?php //dropdowm box for genre ?>
-    Genre: <select name="genre">
+    <tr>
+	<td>Genre: </td><td><select name="genre">
         <option value="null"></option>
         <option value="alternative">Alternative</option>
         <option value="country">Country</option>
@@ -16,9 +27,11 @@
         <option value="rap">Rap</option>
         <option value="rock">Rock</option>
         <option value="other">Other</option>
-    </select></br>
+    </select></td>
+	</tr>
     <?php //dropdown box for release year ?>
-    Release Year: <select name="releaseYear">
+    <tr>
+	<td>Release Year: </td><td><select name="releaseYear">
         <option value="null"></option>
         <?php
             $year= date('Y');
@@ -26,34 +39,48 @@
                 print("<option value=\"$j\"> $j</option>");
             }
         ?>
-    </select></br>
+    </select></td>
+	</tr>
     <?php //dropdown box for quality ?>
-    Quality: <select name="quality">
+    <tr>
+	<td>Quality: </td><td><select name="quality">
         <option value="null"></option>
         <option value="useable">Usable</option>
         <option value="needsWork">Needs Work</option>
         <option value="bad">Bad</option>
-    </select></br>
+    </select></td>
+	</tr>
     <?php //radio buttons for active ?>
-    Active: <input type="radio" name="active" value="yes" checked>Yes
-    <input type="radio" name="active" value="no">No</br>
+    <tr>
+	<td>Active: </td><td><input type="radio" name="active" value="yes" checked>Yes
+    <input type="radio" name="active" value="no">No</td>
+	</tr>
     <?php //dropdown box for arrangement structure ?>
-    Arrangement Structure: <select name="structure">
+    <tr>
+	<td>Arrangement Structure: </td><td><select name="structure">
         <option value="null"></option>
         <option value="4part">4-Part</option>
         <option value="group">Group</option>
         <option value="modern">Modern</option>
         <option value="glee">Glee/Choral</option>
-    </select>
+    </select></td>
+	</tr>
     <?php //radio buttons for syllables ?>
-    Syllables: <input type="radio" name="syllables" value="yes">Yes
-    <input type="radio" name="syllables" value="no">No</br>
+    <tr>
+	<td>Syllables: </td><td><input type="radio" name="syllables" value="yes">Yes
+    <input type="radio" name="syllables" value="no">No</td>
+	</tr>
     <?php //file input for mp3 ?>
-    MP3: <input type="file" name="mp3">
+	<tr>
+	<td>MP3: </td><td><input type="file" name="mp3"></td>
+	</tr>
     <?php //text box for youtube link ?>
-    Youtube Link: <input type="url" name="youtube">
+	<tr>
+    <td>Youtube Link: </td><td><input type="url" name="youtube"></td>
+	</tr>
     <?php //dropdown box for key ?>
-    Key: <select name="key">
+    <tr>
+	<td>Key: </td><td><select name="key">
         <option value="null"></option>
         <option value="A">A</option>
         <option value="A#">A#</option>
@@ -74,9 +101,11 @@
         <option value="null"></option>
         <option value="major">Major</option>
         <option value="minor">Minor</option>
-    </select>
+    </select></td>
+	</tr>
     <?php //dropdown box for solo range ?>
-    Solo Range: <select name="soloRange">
+    <tr>
+	<td>Solo Range: </td><td><select name="soloRange">
         <option value="null"></option>
         <option value="A">A</option>
         <option value="B">B</option>
@@ -95,8 +124,9 @@
         <option value="E">E</option>
         <option value="F">F</option>
         <option value="G">G</option>
-    </select>
-
+    </select></td>
+	</tr>
+	</table>
     <?php //submit button?>
     <input type="submit" name="submit">
 </form>

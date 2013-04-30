@@ -12,12 +12,14 @@
     <script type="text/javascript" src="searchscript.js"></script>
 </head>
 <body>
-    <form action="searchHandler.php" method="post">
+    <div class="wrapper">
+    <div class="left">
+        <form action="searchHandler.php" method="post">
 
         <table>
         <tr>
-            <!-- Dropdown that will allow user to pick what parameter to search by -->
             <td>
+            <!-- Dropdown that will allow user to pick what parameter to search by -->
                 <select id="sortBy" name="sortBy">
                 <option value="songName">Song Name</option>
                 <option value="artistName">Artist</option>
@@ -32,35 +34,52 @@
                 <input id="submit" type="submit" name="submit" value="SEARCH!" />
             </td>
         </tr>
-        
+        </table>
+    </div>
+
+    <div class="right">
+        <h2>Advanced Search</h2>
         <!-- Add a button that will hide/show the following options -->
-
-        <tr><td>
+        <table>
+        <tr>
+        <td>
             <input type="checkbox" name="options[]" value="active" />Active
-        </tr></td>
-        <tr><td>
+        </td>
+        <td>
             <input type="checkbox" name="options[]" value="hasYoutube" />Youtube Link?
-        </tr></td>
-        <tr><td>
+        </td>
+        <td>
             <input type="checkbox" name="options[]" value="hasMp3" />MP3?
-        </tr></td>
-
+        </td>
+        <td>
         <select name="genre">
-            <option value="" />-TBD-
-            
-            <?php
-                include('helperFunctions.php');
-                startMysql();
-                $query = "SELECT DISTINCT genre FROM songs";
-                $result = $mysqli->query($query);
-                while($genre = $result->fetch_row()){
-                    print("<option value=\"$genre[0]\" />$genre[0]");
-                }
-                mysqli_close($mysqli);
-            ?>
+        <option value="" />-TBD-
+
+        <?php
+        include('helperFunctions.php');
+        startMysql();
+        $query = "SELECT DISTINCT genre FROM songs";
+        $result = $mysqli->query($query);
+        while($genre = $result->fetch_row()){
+            print("<option value=\"$genre[0]\" />$genre[0]");
+        }
+        mysqli_close($mysqli);
+        ?>
         </select>
+        </td>
+        </tr>
+        <tr>
+            <td></td><td></td><td></td>
+        <td>
+            <input id="advsubmit" type="advsubmit" name="advsubmit" value="SEARCH!" />
+        </td>
+        </tr>
+        </table>
+
         <?php //Other advanced options?? ?>
-    </form>
+        </form>
+    </div>
+    </div>
     
     <?php
         //Will toggle the advanced search options

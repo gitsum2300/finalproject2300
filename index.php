@@ -20,7 +20,7 @@
     <?php
 
         if(!isset($_SESSION['user'])){
-           // include("userlogin.php"); //Login form for the user - create this page
+           // include("login.php"); //Login form for the user - create this page
         }else{
             include("search.php"); //Search page for the database - create this page
         }

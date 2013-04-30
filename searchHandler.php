@@ -1,15 +1,16 @@
 <?php
-
+    if(!isset($_SESSION)){
+        session_start();
+    }
 ?>
 
 <html>
 <head>
-	<link href='http://fonts.googleapis.com/css?family=Quicksand:700|Titillium+Web|Merriweather+Sans:800' rel='stylesheet' type='text/css'>
-	<link href='http://fonts.googleapis.com/css?family=Gentium+Basic:400,700' rel='stylesheet' type='text/css'>
-	<title>Song Information</title>
-	<link rel="stylesheet" type="text/css" href="main.css">
+    <title> The Hangovers - Song Repertoire </title>
+    <link href="main.css" rel="stylesheet" type="text/css" />
+    <link href='http://fonts.googleapis.com/css?family=Boogaloo' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
 </head>
-
 <body>
 <h1>the<span>HANGOVERS</span></h1>
 <?php

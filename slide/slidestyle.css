@@ -1,0 +1,19 @@
+#slideshow img{
+    height: 400px;
+    float: left;
+    width: 100%;
+}
+
+.pager a{
+    font-size: 20px;
+    padding: 5px;
+    margin: 2px;
+    text-decoration: none;
+    background-color: #531DFF;
+    color: white;
+}
+
+.page a:hover{
+    background-color: white;
+    color: #531DFF;
+}

@@ -17,32 +17,39 @@
         include 'nav.php';
     ?>
     <h2>Administrator Tools</h2>
-	
-	<div id = "songForm">
-    <h3>Song Upload</h3>
-    <?php include("songUpload.php"); ?>
-	</div>
-	
-	<div id = "songForm">
-    <h3>Create an Album</h3>
-    <?php include("albumUpload.php"); ?>
-	</div>
-	
-	<div id = "songForm">
-    <h3>Create a Concert</h3>
-    <?php include("concertUpload.php"); ?>
-	</div>
-	
-	<div id = "songForm">
-    <h3>Edit an Album</h3>
-    <?php include("albumEdit.php"); ?>
-	</div>
-	
-	<div id = "songForm">
-    <h3>Edit a Concert</h3>
-    <?php include("concertEdit.php"); ?>
-	</div>
     
+    <?php
+    if(isset($_SESSION['user']) && ($_SESSION['user'] == "member" || $_SESSION['user'] == "admin")){
+    ?>
+        <div id = "songForm">
+        <h3>Song Upload</h3>
+        <?php include("songUpload.php"); ?>
+            </div>
+            
+            <div id = "songForm">
+        <h3>Create an Album</h3>
+        <?php include("albumUpload.php"); ?>
+            </div>
+            
+            <div id = "songForm">
+        <h3>Create a Concert</h3>
+        <?php include("concertUpload.php"); ?>
+            </div>
+            
+            <div id = "songForm">
+        <h3>Edit an Album</h3>
+        <?php include("albumEdit.php"); ?>
+            </div>
+            
+            <div id = "songForm">
+        <h3>Edit a Concert</h3>
+        <?php include("concertEdit.php"); ?>
+            </div>
+    <?php
+    }else{
+        print("<h3>Please log in to make changes.</h3>");
+    }
+    ?>
 </body>
 </html>
     

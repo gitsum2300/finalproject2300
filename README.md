@@ -4,7 +4,7 @@ finalproject2300
 Repository for final project in CS 2300.
 
 Username: gitsum2300
-Password: nomnom2
+Password: license2code
 
 --
 DISCLAIMER: These are my personal notes - an online git manual will probably contain more accurate/precise definitions.

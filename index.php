@@ -13,24 +13,24 @@
 </head>
 <body>
     <?php
-    $_SESSION['user'] = "admin";  //REMOVE THIS - DEMO ONLY
+    //$_SESSION['user'] = "admin";  //REMOVE THIS - DEMO ONLY
     ?>
     <h1>the<span>HANGOVERS</span></h1>
     <?php include 'nav.php'; ?>
     <?php
 
-        if(!isset($_SESSION['user'])){
-           // include("login.php"); //Login form for the user - create this page
-        }else{
             include("search.php"); //Search page for the database - create this page
-        }
         
         //If user is an admin, show links for the upload pages
-        if($_SESSION['user'] == "admin"){
+        if(isset($_SESSION['user']) && $_SESSION['user'] == "admin"){
             
         }
         //include("footer.php"); //Website footer - create this page
+    
     ?>
+    
+    
+    
 
 </body>
 </html>

@@ -1,8 +1,10 @@
 //Document handles real-time user album edit feedback
 $(document).ready( function(){
     $("#albumNew").change(changeAlbumFields);
-    $("#addEditAlbumRow").click(getSongsAlbumEdit);
-    //$("#buttonNext").after('<td><input type="button" id="addEditAlbumRow" name="addEditAlbumRow" value="add another song"></td>');
+    $("#buttonNextAlbumEdit").after('<td><input type="button" id="addEditAlbumRow" name="addEditAlbumRow" value="add another song"></td>');
+    $("#addEditAlbumRow").on("click", function() {
+        getSongsAlbumEdit();
+    });
 });
 
    

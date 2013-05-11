@@ -9,7 +9,7 @@
     
         //check if album name is valid
         if(!checkName($_POST['concertName'])){
-            print('concertName is not valid');
+            print('<p style="color:red"> Concert Name is not valid</p>');
         }
         else {
             $mysqli->query('INSERT INTO concerts(concertName, concertYear)
@@ -46,7 +46,7 @@
             ?>
         </select></td></tr>
         <tr>  
-            <td>Add Song: </td><td><select name="concertSong[]" id="concertSong">
+            <td>Add Song: </td><td id="buttonNextConcertUpload"><select name="concertSong[]" id="concertSong">
             <option value="null"></option>
             <?php
                 startMysql();
@@ -59,7 +59,7 @@
                 mysqli_close($mysqli);
             ?>
         </select></td>
-        <td><input type="button" id="addUploadConcertRow" name="addUploadConcertRow" value="add another song"></td></tr>
+        </tr>
     </table>
     <input type="submit" name="submitConcert">
 </form>

@@ -1,5 +1,6 @@
 html {
 	overflow-y: scroll;
+	font-size: 16px;
 }
 
 h1 {
@@ -18,6 +19,11 @@ h1 span {
 
 h2 {
 	text-align: center;
+	color: #CCC;
+	margin: 1em 0 1em 0;
+}
+
+h3 {
 	color: #FA4B2A;
 }
 
@@ -27,90 +33,136 @@ body {
 	margin: 0 0 0 0;
 }
 
-::-webkit-input-placeholder {
-	font-size: .8em;
-	position: relative;
-	left: .5em;
-	top: .1em;
-}
-
-::-moz-placeholder {  /* Firefox 19+ */
-	font-size: .8em;
-	position: relative;
-	left: .5em;
-	top: .1em;
-}
-
-:-ms-input-placeholder {  
-	font-size: .8em;
-	position: relative;
-	left: .5em;
-	top: .1em;
-}
-
-.left {
-	float: left;
-	width: 66%;
-	border-right:solid 1px #b7ddf2;
-	margin: 0 0 0 0;
-}
-
-.right {
-	float: right;
-	width: 32%;
-	margin: 0 0 0 0;
-}
-
-table {
-	font-size: 1.2em;
+.qsearch table {
 	margin-left: auto;
 	margin-right: auto;
 }
 
-.left table {
-	height: 40%;
+.wrapperleft {
+	float: left;
+	width: 68%;
+	margin: 0;
+	min-width: 700px;
 }
 
-.right table {
-	height: 20%;
+.qsearch {
+	border-bottom: solid 2px #b7ddf2;
+	padding: 0 0 1.5em 0;
+	margin: 0 1% 0 1%;
 }
+
+.stable; {
+	float: left;
+}
+
+.wrapperright {
+	position: fixed;
+	right: 0;
+	height: 80%;
+	width: 32%;
+	border-left: solid 2px #b7ddf2;
+	margin: 1% 0 1% 0;
+	min-width: 400px;
+}
+
+.adv1 {
+	float: left;
+	width: 50%;
+}
+
+.adv1 table {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.adv2 {
+	float: left;
+	width: 50%;
+	border-left: solid 1px #b7ddf2;
+}
+
+.adv2 table {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#searchTable {
+	font-size: 14px;
+	border-collapse: collapse;
+}
+
+.stable table {
+	margin: 1em auto 1em auto;
+}
+
+#searchTable tr th{
+    background-color: #531DFF;
+    color: #FFFFFF;
+}
+
+#searchTable td {
+	border: solid 1px #BBB;
+	padding: 2px;
+}
+
+#searchTable th {
+	border: solid 1px #BBB;
+	padding: 2px;
+}
+
+a{
+    text-decoration: none;
+    color: #531DFF;
+    font-weight: bold;
+}
+
+a:hover {
+    color: #FFFFFF;
+}
+
+/*
+#searchtable .songData{
+    background-color: #E3C9FF;
+}*/
 
 #search {
-	width: 20em;
-	font-size: 1em;
-	margin-right: .5em;
+	width: 36em;
+	height: 2.5em;
+	font-size: 16px;
+	font-weight: bold;
+	padding-left: .5em;
 }
 
-#advsubmit {
+.advform {
+	width: 13em;
+	height: 2.0em;
+	font-size: 14px;
+	font-weight: bold;
+	padding-left: .30em;
+}
+
+.submit {
 	clear: both;
-	width: 6.5em;
-	height: 2.5em;
+	width: 7.0em;
+	height: 3.0em;
 	background: #531DFF;
+	border-color: #531DFF;
 	text-align: center;
-	line-height: 2em;
 	color: #FFFFFF;
-	font-size: .8em;
 	font-weight: bold;
 }
 
-#sortBy {
-	width: 7em;
-	font-size: 1em;
-	margin-right: .5em;
+::-webkit-input-placeholder {
+   color: #CCC;
 }
 
-#submit {
-	clear: both;
-	width: 6.5em;
-	height: 2.5em;
-	background: #531DFF;
-	text-align: center;
-	line-height: 2em;
-	color: #FFFFFF;
-	font-size: .8em;
-	font-weight: bold;
+::-moz-placeholder {  /* Firefox 19+ */
+   color: #CCC; 
 }
 
+:-ms-input-placeholder {  
+   color: #CCC;
+}
 
 /* ------------------------------
 #NAV adapted from woork.blogspot.com
@@ -179,10 +231,6 @@ License:  none (public domain)
 
 #slick-login label {
 	display: none;
-}
-
-.placeholder {
-    color: #444;
 }
 
 #slick-login input[type="text"],#slick-login input[type="password"] {
@@ -316,9 +364,26 @@ License:  none (public domain)
 	float: left;
 }
 
-#songForm{
+.admin{
+	float: left;
+	width: 550px;
 	background-color: #F0F0F0;
-	padding: 10px;
-	border: 2px solid black;
-	margin: 5px;
+	padding-left: 20px;
+	border: solid 2px #CCC;
+	margin: 0 0 1% 1%;
+}
+
+.adminColumn{
+    float: left;
+    margin-left: 5px;
+    margin-right: 5px;
+    width: 550px;
+
+}
+
+#adminBoxes{
+    float: left;
+    margin: 0px auto;
+    text-align: center;
+    width: 100%;
 }

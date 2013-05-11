@@ -18,10 +18,10 @@ if(isset($_SESSION['user'])){
                 <?php
                 if ($_SESSION['user'] == "admin"){
                 ?>
-                    <li>Welcome, Administrator!</li>
+                    <li>&nbsp;&nbsp;Welcome, Administrator!</li>
                 <?php
                 }else{
-                    print("<li>Welcome, Member!</li>");
+                    print("<li>&nbsp;&nbsp;Welcome, Member!</li>");
                 }
                 ?>
 	<ul>
@@ -32,9 +32,8 @@ if(isset($_SESSION['user'])){
 	<div id="nav">
 	<ul>
 		<li><a href="index.php"><span>Home</span></a></li>
-		<li><a href="uploader.php"><span>Admin</span></a><li>
 		<li><a href="login.php"><span>Login</span></a><li>
-            <li>Welcome, Guest!</li>
+                <li>&nbsp;&nbsp;Welcome, Guest!</li>
 	<ul>
 	</div>
 	<?php

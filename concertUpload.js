@@ -1,6 +1,8 @@
 $(document).ready( function(){
-    $("#addUploadConcertRow").click(getSongsConcertUpload);
-    //$("#buttonNext").after('<td><input type="button" id="addEditConcertRow" name="addEditConcertRow" value="add another song"></td>');
+    $("#buttonNextConcertUpload").after('<td><input type="button" id="addUploadConcertRow" name="addUploadConcertRow" value="add another song"></td>');
+    $("#addUploadConcertRow").on("click", function() {
+        getSongsConcertUpload();
+    });
 });
 
 function getSongsConcertUpload(){

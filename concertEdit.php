@@ -5,39 +5,41 @@
     if(isset($_POST['submitConcertNew'])){
         startMysql();
         
-        //check if concert name is valid
-        if(isset($_POST['concertNameNew']) && $_POST['concertNameNew']!=''){
-            if(!checkName($_POST['concertNameNew'])){
-                print('concertName is not valid');
-            }
-            else {
-                $mysqli->query('UPDATE concerts SET concertName="'.$_POST['concertNameNew'].'"
-                               WHERE concertid="'.$_POST['concertNew'].'"');
-            }
-        }
+        if(empty($_POST['deleteConcert'])){
         
-        for($j=0;$j<count($_POST['concertSongNew']);$j++){
-            if($_POST['concertSongNew'][$j]!='null'){
-                $copy= $mysqli->query('SELECT songid FROM concertLink WHERE concertid="'.$_POST['concertNew'].'"AND songid="'.$_POST['concertSongNew'][$j].'"');
-                if($copy->num_rows<1){
-                    $mysqli->query('INSERT INTO concertLink(songId, concertid)
-                                VALUES("'.$_POST['concertSongNew'][$j].'", "'.$_POST['concertNew'].'")');
+            //check if concert name is valid
+            if(isset($_POST['concertNameNew']) && $_POST['concertNameNew']!='' && $_POST['concertNameNew']!=$_POST['concertNew']){
+                if(!checkName($_POST['concertNameNew'])){
+                    print('<p style="color:red"> Concert Name is not valid </p>');
+                }
+                else {
+                    $mysqli->query('UPDATE concerts SET concertName="'.$_POST['concertNameNew'].'"
+                                   WHERE concertid="'.$_POST['concertNew'].'"');
+                }
+            }
+            
+            for($j=0;$j<count($_POST['concertSongNew']);$j++){
+                if($_POST['concertSongNew'][$j]!='null'){
+                    $copy= $mysqli->query('SELECT songid FROM concertLink WHERE concertid="'.$_POST['concertNew'].'"AND songid="'.$_POST['concertSongNew'][$j].'"');
+                    if($copy->num_rows<1){
+                        $mysqli->query('INSERT INTO concertLink(songId, concertid)
+                                    VALUES("'.$_POST['concertSongNew'][$j].'", "'.$_POST['concertNew'].'")');
+                    }
+                }
+            }
+            
+            if($_POST['concertYearNew']!='null'){
+                $mysqli->query('UPDATE concerts SET concertYear="'.$_POST['concertYearNew'].'"
+                                   WHERE concertid="'.$_POST['concertNew'].'"');
+            }
+            
+            if(!empty($_POST['deleteFromConcert'])){
+                for($k=0;$k<count($_POST['deleteFromConcert']);$k++){
+                    $mysqli->query('DELETE FROM concertLink WHERE concertid="'.$_POST['concertNew'].'" AND songid="'.$_POST['deleteFromConcert'][$k].'"');
                 }
             }
         }
-        
-        if($_POST['concertYearNew']!='null'){
-            $mysqli->query('UPDATE concerts SET concertYear="'.$_POST['concertYearNew'].'"
-                               WHERE concertid="'.$_POST['concertNew'].'"');
-        }
-        
-        if(!empty($_POST['deleteFromConcert'])){
-            for($k=0;$k<count($_POST['deleteFromConcert']);$k++){
-                $mysqli->query('DELETE FROM concertLink WHERE concertid="'.$_POST['concertNew'].'" AND songid="'.$_POST['deleteFromConcert'][$k].'"');
-            }
-        }
-        
-        if(!empty($_POST['deleteConcert'])){
+        else {
             $mysqli->query('DELETE FROM concerts WHERE concertid="'.$_POST['concertNew'].'"');
             $mysqli->query('DELETE FROM concertLink WHERE concertid="'.$_POST['concertNew'].'"');
         }
@@ -73,7 +75,7 @@
             ?>
         </select></td></tr>
         <tr>  
-            <td>Add Song: </td><td id="buttonNext"><select id= "concertSongNew" name="concertSongNew">
+            <td>Add Song: </td><td id="buttonNextConcertEdit"><select id= "concertSongNew" name="concertSongNew">
             <option value="null"></option>
             <?php
                 startMysql();
@@ -86,7 +88,7 @@
                 mysqli_close($mysqli);
             ?>
         </select></td>
-        <td><input type="button" id="addEditConcertRow" name="addEditConcertRow" value="add another song"></td></tr> 
+        </tr> 
         <div id="deleteCodeConcert"></div>
         <tr><td>Delete Entire Concert: </td><td><input type="checkbox" value="" id="deleteConcert" name="deleteConcert[]"></td></tr>
     </table>

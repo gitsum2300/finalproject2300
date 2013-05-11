@@ -1,24 +1,18 @@
-<div class="right">
+<h2>Advanced Search</h2>
 <form action="adSearchHandler.php" method="get">   
     <!-- Dropdown that will allow user to pick what parameter to search by -->
-    <h2>Advanced Search</h2>
+    <div class="adv1">
     <table>
-        <tr><td><input type="text" name="adsongTitle" placeholder="Song Title..." /></td></tr>
-        <tr><td><input type="text" name="adartist" placeholder="Artist..." /></td></tr>
-        <tr><td><input type="text" name="adarranger" placeholder="Arranger..." /></td></tr>
-        <tr><td><input type="text" name="adalbum" placeholder="Album..." /></td></tr>
-        <tr><td><input type="text" name="adconcert" placeholder="Concert..." /></td></tr>
-    
-    <?php /*
-    <select id="sortBy" name="sortBy">
-        <option value="songName">Song Name</option>
-        <option value="artistName">Artist</option>
-        <option value="arranger">Arranger</option>
-        <option value="concertName">Concert</option>
-    </select> */ ?>
-    
-    <!-- Add a button that will hide/show the following options -->
+        <tr><td><input class="advform" type="text" name="adsongTitle" placeholder="Song Title..." /></td></tr>
+        <tr><td><input class="advform" type="text" name="adartist" placeholder="Artist..." /></td></tr>
+        <tr><td><input class="advform" type="text" name="adarranger" placeholder="Arranger..." /></td></tr>
+        <tr><td><input class="advform" type="text" name="adalbum" placeholder="Album..." /></td></tr>
+        <tr><td><input class="advform" type="text" name="adconcert" placeholder="Concert..." /></td></tr>
+    </table>
+    </div>
 
+    <div class="adv2">
+        <table>
         <tr><td>
             <input type="checkbox" name="adactive"/>Active
         </td></tr>
@@ -43,6 +37,7 @@
         </td></tr>
 
     <!-- Key selector --> 
+        
         <tr><td>
             Key:<select name="adkey">
             <option value="null"></option>
@@ -67,7 +62,9 @@
             <option value="minor">Minor</option>
         </select>
         </td><tr>
+
         <!--Solo range selector-->
+        
         <tr><td>
         Solo Range:<select name="adsoloRange">
             <option value="null"></option>
@@ -90,10 +87,8 @@
             <option value="F">F</option>
             <option value="G">G</option>
         </select></td></tr>
-
-        <tr><td>
-        <input id="advsubmit" type="submit" name="advSubmit" value="Adv. Search"/>
-        </td></tr>
     </table>
+    </div>
+
+    <input class="submit" type="submit" name="advSubmit" value="SEARCH!"/>
 </form>
-</div>

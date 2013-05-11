@@ -6,7 +6,7 @@
 
 <html>
 <head>
-    <title> Admin Page </title>
+    <title>Admin Page</title>
     <link href="main.css" rel="stylesheet" type="text/css" />
     <link href='http://fonts.googleapis.com/css?family=Boogaloo' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
@@ -21,30 +21,38 @@
     <?php
     if(isset($_SESSION['user']) && ($_SESSION['user'] == "member" || $_SESSION['user'] == "admin")){
     ?>
-        <div id = "songForm">
-        <h3>Song Upload</h3>
-        <?php include("songUpload.php"); ?>
+    
+    <div id="adminBoxes">
+        <div class="adminColumn">
+            <div class = "admin">
+                <h3>Song Upload</h3>
+                <?php include("songUpload.php"); ?>
+            </div>
+        
+            <div class = "admin">
+                <h3>Create a Concert</h3>
+                <?php include("concertUpload.php"); ?>
             </div>
             
-            <div id = "songForm">
-        <h3>Create an Album</h3>
-        <?php include("albumUpload.php"); ?>
+        </div>
+    
+        <div class="adminColumn">
+            <div class = "admin">
+                <h3>Create an Album</h3>
+                <?php include("albumUpload.php"); ?>
+            </div>
+        
+            <div class = "admin">
+                <h3>Edit an Album</h3>
+                <?php include("albumEdit.php"); ?>
             </div>
             
-            <div id = "songForm">
-        <h3>Create a Concert</h3>
-        <?php include("concertUpload.php"); ?>
+            <div class = "admin">
+                <h3>Edit a Concert</h3>
+                <?php include("concertEdit.php"); ?>
             </div>
-            
-            <div id = "songForm">
-        <h3>Edit an Album</h3>
-        <?php include("albumEdit.php"); ?>
-            </div>
-            
-            <div id = "songForm">
-        <h3>Edit a Concert</h3>
-        <?php include("concertEdit.php"); ?>
-            </div>
+        </div>
+    </div>
     <?php
     }else{
         print("<h3>Please log in to make changes.</h3>");

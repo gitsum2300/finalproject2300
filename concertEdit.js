@@ -1,7 +1,10 @@
 //Document handles real-time user concert edit feedback
 $(document).ready( function(){
     $("#concertNew").change(changeConcertFields);
-    $("#addEditConcertRow").click(getSongsConcertEdit);
+    $("#buttonNextConcertEdit").after('<td><input type="button" id="addEditConcertRow" name="addEditConcertRow" value="add another song"></td>');
+    $("#addEditConcertRow").on("click", function() {
+        getSongsConcertEdit();
+    });
 });
 
    

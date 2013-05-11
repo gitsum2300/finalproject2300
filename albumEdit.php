@@ -3,46 +3,48 @@
 
 <?php
     if(isset($_POST['submitAlbumNew'])){
-        startMysql();
-    
-        //check if album name is valid
-        if(isset($_POST['albumNameNew']) && $_POST['albumNameNew']!='' && $_POST['albumNameNew']!=$_POST['albumNew']){
-            if(!checkName($_POST['albumNameNew'])){
-                print('albumName is not valid');
-            }
-            else {
-                $mysqli->query('UPDATE albums SET albumName="'.$_POST['albumNameNew'].'"
-                               WHERE albumid="'.$_POST['albumNew'].'"');
-            }
-        }
         
-        for($j=0;$j<count($_POST['albumSongNew']);$j++){
-            if($_POST['albumSongNew'][$j]!='null'){
-                $copy= $mysqli->query('SELECT songid FROM albumLink WHERE albumid="'.$_POST['albumNew'].'"AND songid="'.$_POST['albumSongNew'][$j].'"');
-                if($copy->num_rows<1){
-                    $mysqli->query('INSERT INTO albumLink(songId, albumid)
-                                VALUES("'.$_POST['albumSongNew'][$j].'", "'.$_POST['albumNew'].'")');
+        startMysql();
+        
+        if(empty($_POST['deleteAlbum'])){
+        
+            //check if album name is valid
+            if(isset($_POST['albumNameNew']) && $_POST['albumNameNew']!='' && $_POST['albumNameNew']!=$_POST['albumNew']){
+                if(!checkName($_POST['albumNameNew'])){
+                    print('<p style="color:red"> Album Name is not valid</p>');
+                }
+                else {
+                    $mysqli->query('UPDATE albums SET albumName="'.$_POST['albumNameNew'].'"
+                                   WHERE albumid="'.$_POST['albumNew'].'"');
+                }
+            }
+            
+            for($j=0;$j<count($_POST['albumSongNew']);$j++){
+                if($_POST['albumSongNew'][$j]!='null'){
+                    $copy= $mysqli->query('SELECT songid FROM albumLink WHERE albumid="'.$_POST['albumNew'].'"AND songid="'.$_POST['albumSongNew'][$j].'"');
+                    if($copy->num_rows<1){
+                        $mysqli->query('INSERT INTO albumLink(songId, albumid)
+                                    VALUES("'.$_POST['albumSongNew'][$j].'", "'.$_POST['albumNew'].'")');
+                    }
+                }
+            }
+            
+            if($_POST['hangoverYearNew']!='null'){
+                $mysqli->query('UPDATE albums SET hangoverYear="'.$_POST['hangoverYearNew'].'"
+                                   WHERE albumid="'.$_POST['albumNew'].'"');
+            }
+            
+            if(!empty($_POST['deleteFromAlbum'])){
+                for($k=0;$k<count($_POST['deleteFromAlbum']);$k++){
+                    $mysqli->query('DELETE FROM albumLink WHERE albumid="'.$_POST['albumNew'].'" AND songid="'.$_POST['deleteFromAlbum'][$k].'"');
                 }
             }
         }
-        
-        if($_POST['hangoverYearNew']!='null'){
-            $mysqli->query('UPDATE albums SET hangoverYear="'.$_POST['hangoverYearNew'].'"
-                               WHERE albumid="'.$_POST['albumNew'].'"');
-        }
-        
-        if(!empty($_POST['deleteFromAlbum'])){
-            for($k=0;$k<count($_POST['deleteFromAlbum']);$k++){
-                $mysqli->query('DELETE FROM albumLink WHERE albumid="'.$_POST['albumNew'].'" AND songid="'.$_POST['deleteFromAlbum'][$k].'"');
-            }
-        }
-        
-        if(!empty($_POST['deleteAlbum'])){
+        else {
             $mysqli->query('DELETE FROM albums WHERE albumid="'.$_POST['albumNew'].'"');
             $mysqli->query('DELETE FROM albumLink WHERE albumid="'.$_POST['albumNew'].'"');
         }
-        
-        mysqli_close($mysqli); 
+        mysqli_close($mysqli);
     }
 
 ?>
@@ -75,7 +77,7 @@
             ?>
         </select></td></tr>
         <tr>  
-            <td >Add Song: </td><td><select id="albumSongNew" name="albumSongNew[]">
+            <td >Add Song: </td><td id="buttonNextAlbumEdit"><select id="albumSongNew" name="albumSongNew[]">
             <option value="null"></option>
             <?php
                 startMysql();
@@ -90,7 +92,6 @@
                 mysqli_close($mysqli);
             ?>
         </select></td>
-        <td><input type="button" id="addEditAlbumRow" name="addEditAlbumRow" value="add another song"></td>
         </tr>
         <div id="deleteCodeAlbum"></div>
         <tr id="deleteEntireAlbum"><td>Delete Entire Album: </td><td><input type="checkbox" value="" id="deleteAlbum" name="deleteAlbum[]"></td></tr>

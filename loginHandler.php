@@ -22,11 +22,9 @@
         }
         
         require('index.php');
-        print($_SESSION['message']);
     }else{
         $_SESSION['message'] = "Username/password combination is invalid";
         require('index.php');
-        print($_SESSION['message']);
         
     }
 ?>

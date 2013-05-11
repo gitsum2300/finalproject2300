@@ -1,9 +1,8 @@
 <script type="text/javascript" src="jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="searchTable.js"></script>
 
-
-<table border="1" id="searchTable">
-    <tr bgcolor="#FFFFFF" onMouseOver="this.bgColor='gold';" onMouseOut="this.bgColor='#FFFFFF';">
+<table id="searchTable">
+    <tr>
         <th>Song ID</th>
         <th>Song</th>
         <th>Artist</th>
@@ -33,10 +32,10 @@
             $sresults = $_SESSION['sresults'];            
             
             for($i = 0; $i<count($sresults); $i++){
-                print("<tr bgcolor=\"#FFFFFF\" onMouseOver=\"this.bgColor='gold';\" onMouseOut=\"this.bgColor='#FFFFFF';\">");
+                print("<tr bgcolor=\"#FFFFFF\" onMouseOver=\"this.bgColor='#E3C9FF';\" onMouseOut=\"this.bgColor='#FFFFFF';\">");
                 //Add the info from fow for song, artist, album, genre, etc.
                     print("<td>".$sresults[$i]['songid']. "</td>");
-                    print("<td><a href=\"songPage.php?songid=".$sresults[$i]['songid']."\"</a>".$sresults[$i]['songName']. "</td>");
+                    print("<td class=\"songData\"><a href=\"songPage.php?songid=".$sresults[$i]['songid']."\"</a>".$sresults[$i]['songName']. "</td>");
                     print("<td>".$sresults[$i]['artistName']. "</td>");
                     print("<td>".$sresults[$i]['genre']. "</td>");
                     print("<td>".$sresults[$i]['albumName']."</td>");
@@ -48,7 +47,7 @@
             unset($_SESSION['sresults']);
         }else{
             while($row = $result->fetch_assoc()){
-                print("<tr bgcolor=\"#FFFFFF\" onMouseOver=\"this.bgColor='gold';\" onMouseOut=\"this.bgColor='#FFFFFF';\">");
+                print("<tr bgcolor=\"#FFFFFF\" onMouseOver=\"this.bgColor='#E3C9FF';\" onMouseOut=\"this.bgColor='#FFFFFF';\">");
                 $query2= 'SELECT albumName FROM songs NATURAL JOIN albumLink NATURAL JOIN albums
                 WHERE songid="'.$row['songid'].'"';
                 $result2= $mysqli->query($query2);
@@ -73,7 +72,7 @@
                         $concertText= substr($concertText,0,$concertTextLength-2);
                     }
                     print("<td>".$row['songid']. "</td>");
-                    print("<td><a href=\"songPage.php?songid=".$row['songid']."\"</a>".$row['songName']."</td>");
+                    print("<td class=\"songData\"><a href=\"songPage.php?songid=".$row['songid']."\"</a>".$row['songName']. "</td>");
                     print("<td>".$row['artistName']. "</td>");
                     print("<td>".$row['genre']. "</td>");
                     print("<td>".$albumText."</td>");

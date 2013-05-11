@@ -8,6 +8,7 @@
 <head>
     <title> Settings Page </title>
     <link href="main.css" rel="stylesheet" type="text/css" />
+     <link href="substyle.css" rel="stylesheet" type="text/css" />
     <link href='http://fonts.googleapis.com/css?family=Boogaloo' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
 </head>
@@ -18,10 +19,19 @@
     ?>
     <h2>Settings</h2>
     
+    <div class="message">
+            <?php
+                if(isset($_SESSION['settingsMessage'])){
+                    print('<p>'.$_SESSION['settingsMessage'].'</p>');
+                    unset($_SESSION['settingsMessage']);
+                }
+            ?>
+    </div>
+    
     <?php
     if(isset($_SESSION['user']) && $_SESSION['user'] == "admin"){
     ?>
-	<div id = "songForm">
+	<div class = "admin">
     <h3>Change Password</h3>
 	<form action="settingsHandler.php" method="post">
         <table>
@@ -52,14 +62,6 @@
 	</form>
         
 	</div>
-        <div id="settingsMessage">
-            <?php
-                if(isset($_SESSION['settingsMessage'])){
-                    print($_SESSION['settingsMessage']);
-                    unset($_SESSION['settingsMessage']);
-                }
-            ?>
-        </div>
     <?php
     }
     else{

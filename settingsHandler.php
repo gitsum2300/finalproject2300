@@ -34,7 +34,7 @@
         }
         mysqli_close($mysqli);
     }else{
-        $_SESSION['settingsMessage'] = "Oops!  Something's broken.";
+        $_SESSION['settingsMessage'] = "Please enter the current password and the desired password.";
         require('settings.php');
     }
     

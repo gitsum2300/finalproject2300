@@ -6,34 +6,34 @@
         $allValid=true;
         $songartistValid=true;
         if(!checkName($_POST['songName'])){
-            print('Song Title is invalid');
+            print('<p style="color:red"> Song Name is not valid</p>');
             $allValid= false;
             $songartistValid=false;
         }
         if(!checkName($_POST['artist'])){
-            print('Artist is invalid');
+            print('<p style="color:red"> Artist is not valid</p>');
             $allValid= false;
             $songartistValid=false;
         }
         if(isset($_POST['arranger']) && $_POST['arranger']!='' && !checkName($_POST['arranger'])){
-            print('Arranger(s) is invalid');
+            print('<p style="color:red"> Arranger(s) is not valid</p>');
             $allValid= false;
         }
         if(isset($_FILES['mp3']) && $_FILES['mp3']['error']==0 && !checkmp3($_FILES['mp3']['name'])){
             $allValid= false;
-            print('mp3 file in not the correct file type');
+            print('<p style="color:red"> Mp3 is not the correct file type</p>');
         }
         if(isset($_FILES['pdf']) && $_FILES['pdf']['error']==0 && !checkpdf($_FILES['pdf']['name'])){
             $allValid= false;
-            print('pdf file in not the correct file type');
+            print('<p style="color:red"> Pdf is not the correct file type</p>');
         }
         if(isset($_POST['youtube']) && $_POST['youtube']!='' && !checkYoutube($_POST['youtube'])){
             $allValid= false;
-            print('youtube link is incorrect');
+            print('<p style="color:red"> Youtube link is not valid</p>');
         }
         if(($_POST['soloRange']!='null' && $_POST['soloRange2']=='null') || ($_POST['soloRange2']!='null' && $_POST['soloRange']=='null')){
             $allValid= false;
-            print('Solo Range must have both values');
+            print('<p style="color:red"> Solo Range must have both values</p>');
         }
         if($songartistValid){
             startMysql();
@@ -41,7 +41,7 @@
                                  WHERE songName="'.$_POST['songName'].'" AND artistName="'.$_POST['artist'].'"');
             if($all->num_rows>0){
                 $allValid=false;
-                print('This song by this artist is already in the database');
+                print('<p style="color:red"> This song by this artist is already in the database </p>');
             }
             mysqli_close($mysqli);
         }
@@ -126,7 +126,7 @@
             }
             
             if($_POST['soloRange']!='null' && $_POST['soloRange2']!='null') {
-                $mysqli->query('UPDATE songs SET soloRange="'.$_POST['soloRange'].' '.$_POST['soloRange2'].'"
+                $mysqli->query('UPDATE songs SET soloRange="'.$_POST['soloRange'].'-'.$_POST['soloRange2'].'"
                                WHERE songid="'.$songid.'"');
             }
             

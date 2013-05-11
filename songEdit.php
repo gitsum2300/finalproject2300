@@ -8,158 +8,176 @@
     //if submit
     if(isset($_POST['submitNew'])){
         
-        $songData= $mysqli->query('SELECT * FROM songs NATURAL JOIN artists NATURAL JOIN artistLink
-                              WHERE songid="'.$songid.'"');
-        $row= $songData->fetch_assoc();
-    
-        if(isset($_POST['songNameNew']) && $_POST['songNameNew']!='' && $_POST['songNameNew']!=$row['songName']) {
-            if(checkName($_POST['songNameNew'])) {
-                $mysqli->query('UPDATE songs SET songName="'.$_POST['songNameNew'].'"
+        if(!empty($_POST['deleteSong'])){
+            $mysqli->query('DELETE FROM songs WHERE songid="'.$songid.'"');
+            $mysqli->query('DELETE FROM concertLink WHERE songid="'.$songid.'"');
+            $mysqli->query('DELETE FROM artistLink WHERE songid="'.$songid.'"');
+            $mysqli->query('DELETE FROM albumLink WHERE songid="'.$songid.'"');
+            header( 'Location: index.php' ) ;
+        }
+        else {
+        
+            $songData= $mysqli->query('SELECT * FROM songs NATURAL JOIN artists NATURAL JOIN artistLink
+                                  WHERE songid="'.$songid.'"');
+            $row= $songData->fetch_assoc();
+        
+            if(isset($_POST['songNameNew']) && $_POST['songNameNew']!='' && $_POST['songNameNew']!=$row['songName']) {
+                if(checkName($_POST['songNameNew'])) {
+                    $mysqli->query('UPDATE songs SET songName="'.$_POST['songNameNew'].'"
+                                       WHERE songid="'.$songid.'"');
+                }
+                else {
+                    print('<p style="color:red"> New Song Name is not valid </p>');
+                }
+            }
+            if((isset($_POST['artistNameNew']) && $_POST['artistNameNew']!='' && $_POST['artistNameNew']!=$row['artistName']) || $_POST['releaseYearNew']!=$row['releaseYear']){
+                if(checkName($_POST['artistNameNew'])){
+                    $artistQuery= $mysqli->query('SELECT artistid FROM artists WHERE artistName="'.$_POST['artistNameNew'].'"');
+                    if($artistQuery->num_rows<1){ //artist not yet in DB
+                        $mysqli->query('DELETE FROM artistLink  WHERE songid="'.$songid.'" AND
+                                       artistid="'.$row['artistid'].'" AND releaseYear="'.$row['releaseYear'].'"');
+                        $mysqli->query('INSERT INTO artists(artistName) VALUES("'.$_POST['artistNameNew'].'")');
+                        $artistidquery= $mysqli->query('SELECT max(artistid) FROM artists');
+                        $artistidarray= $artistidquery->fetch_row();
+                        $artistid= $artistidarray[0];
+                        $mysqli->query('INSERT INTO artistLink(songid, artistid, releaseYear)
+                                      VALUES("'.$songid.'", "'.$artistid.'", "'.$_POST['releaseYearNew'].'")');
+                    }
+                    else { //artist already in DB
+                        $artistArray= $artistQuery->fetch_row();
+                        $artistid= $artistArray[0];
+                        $mysqli->query('DELETE FROM artistLink  WHERE songid="'.$songid.'" AND artistid="'.$row['artistid'].'" AND releaseYear="'.$row['releaseYear'].'"');
+                        $mysqli->query('INSERT INTO artistLink(songid, artistid, releaseYear)
+                                      VALUES("'.$songid.'", "'.$artistid.'", "'.$_POST['releaseYearNew'].'")');
+                    }
+                }
+                else{
+                    print('<p style="color:red"> Artist Name is not valid </p>');
+                }
+            }
+            
+            if(isset($_POST['arrangerNew']) && $_POST['arrangerNew']!='' && $_POST['arrangerNew']!=$row['arranger']){
+                if(checkName($_POST['arrangerNew'])){
+                    $mysqli->query('UPDATE songs SET arranger="'.$_POST['arrangerNew'].'"
+                               WHERE songid="'.$songid.'"');
+                }
+                else{
+                    print('<p style="color:red"> Arranger(s) is not valid </p>');
+                }
+            }
+            
+            if($_POST['genreNew']!='null' && $_POST['genreNew']!=$row['genre']) {
+                $mysqli->query('UPDATE songs SET genre="'.$_POST['genreNew'].'"
+                               WHERE songid="'.$songid.'"');
+            }
+            
+            if($_POST['genreNew']=='null' && $row['genre']!=''){
+                $mysqli->query('UPDATE songs SET genre=null
+                               WHERE songid="'.$songid.'"');
+            }
+            
+            if($_POST['qualityNew']!='null' && $_POST['qualityNew']!=$row['quality']) {
+                $mysqli->query('UPDATE songs SET quality="'.$_POST['qualityNew'].'"
+                               WHERE songid="'.$songid.'"');
+            }
+            
+            if($_POST['qualityNew']=='null' && $row['quality']!=''){
+                $mysqli->query('UPDATE songs SET quality=null
+                               WHERE songid="'.$songid.'"');
+            }
+            
+            if($_POST['activeNew']!=$row['active']){
+                $mysqli->query('UPDATE songs SET active="'.$_POST['activeNew'].'"
                                    WHERE songid="'.$songid.'"');
             }
-            else {
-                print('New Song Name is not valid');
-            }
-        }
-        if($_POST['artistNameNew']!=$row['artistName']){print('here');}
-        if((isset($_POST['artistNameNew']) && $_POST['artistNameNew']!='' && $_POST['artistNameNew']!=$row['artistName']) || $_POST['releaseYearNew']!=$row['releaseYear']){
-            if(checkName($_POST['artistNameNew'])){
-                $artistQuery= $mysqli->query('SELECT artistid FROM artists WHERE artistName="'.$_POST['artistNameNew'].'"');
-                if($artistQuery->num_rows<1){ //artist not yet in DB
-                    $mysqli->query('DELETE FROM artistLink  WHERE songid="'.$songid.'" AND
-                                   artistid="'.$row['artistid'].'" AND releaseYear="'.$row['releaseYear'].'"');
-                    $mysqli->query('INSERT INTO artists(artistName) VALUES("'.$_POST['artistNameNew'].'")');
-                    $artistidquery= $mysqli->query('SELECT max(artistid) FROM artists');
-                    $artistidarray= $artistidquery->fetch_row();
-                    $artistid= $artistidarray[0];
-                    $mysqli->query('INSERT INTO artistLink(songid, artistid, releaseYear)
-                                  VALUES("'.$songid.'", "'.$artistid.'", "'.$_POST['releaseYearNew'].'")');
-                }
-                else { //artist already in DB
-                    $artistArray= $artistQuery->fetch_row();
-                    $artistid= $artistArray[0];
-                    $mysqli->query('DELETE FROM artistLink  WHERE songid="'.$songid.'" AND artistid="'.$row['artistid'].'" AND releaseYear="'.$row['releaseYear'].'"');
-                    $mysqli->query('INSERT INTO artistLink(songid, artistid, releaseYear)
-                                  VALUES("'.$songid.'", "'.$artistid.'", "'.$_POST['releaseYearNew'].'")');
-                }
-            }
-            else{
-                print('Artist Name is not valid');
-            }
-        }
-        
-        if(isset($_POST['arrangerNew']) && $_POST['arrangerNew']!='' && $_POST['arrangerNew']!=$row['arranger']){
-            if(checkName($_POST['arrangerNew'])){
-                $mysqli->query('UPDATE songs SET arranger="'.$_POST['arrangerNew'].'"
-                           WHERE songid="'.$songid.'"');
-            }
-            else{
-                print('Arranger(s) is not valid');
-            }
-        }
-        
-        if($_POST['genreNew']!='null' && $_POST['genreNew']!=$row['genre']) {
-            $mysqli->query('UPDATE songs SET genre="'.$_POST['genreNew'].'"
-                           WHERE songid="'.$songid.'"');
-        }
-        
-        if($_POST['genreNew']=='null' && $row['genre']!=''){
-            $mysqli->query('UPDATE songs SET genre=null
-                           WHERE songid="'.$songid.'"');
-        }
-        
-        if($_POST['qualityNew']!='null' && $_POST['qualityNew']!=$row['quality']) {
-            $mysqli->query('UPDATE songs SET quality="'.$_POST['qualityNew'].'"
-                           WHERE songid="'.$songid.'"');
-        }
-        
-        if($_POST['qualityNew']=='null' && $row['quality']!=''){
-            $mysqli->query('UPDATE songs SET quality=null
-                           WHERE songid="'.$songid.'"');
-        }
-        
-        if($_POST['activeNew']!=$row['active']){
-            $mysqli->query('UPDATE songs SET active="'.$_POST['activeNew'].'"
-                               WHERE songid="'.$songid.'"');
-        }
-        
-        if($_POST['structureNew']!='null' && $_POST['structureNew']!=$row['structure']) {
-            $mysqli->query('UPDATE songs SET structure="'.$_POST['structureNew'].'"
-                           WHERE songid="'.$songid.'"');
-        }
-        
-        if($_POST['structureNew']=='null' && $row['structure']!=''){
-            $mysqli->query('UPDATE songs SET structure=null
-                           WHERE songid="'.$songid.'"');
-        }
-        
-        if(isset($_POST['syllablesNew']) && $_POST['syllablesNew']!=$row['syllables']) {
-            $mysqli->query('UPDATE songs SET syllables="'.$_POST['syllablesNew'].'"
-                           WHERE songid="'.$songid.'"');
-        }
-
-        if(file_exists($_FILES['mp3New']['tmp_name']) && checkmp3($_FILES['mp3New']['name'])){
-            if($row['mp3']=='yes'){unlink("mp3/".$songid);}
-            else {
-                $mysqli->query('UPDATE songs SET mp3="yes"
-                           WHERE songid="'.$songid.'"');
-            }
-            move_uploaded_file($_FILES['mp3New']['tmp_name'],"mp3/".$songid);
-        }
-        
-        if(isset($_POST['deleteMp3'])){
-            unlink("mp3/".$songid);;
-            $mysqli->query('UPDATE songs SET mp3="no"
-                           WHERE songid="'.$songid.'"');
-        }
-        
-        if(file_exists($_FILES['pdfNew']['tmp_name']) && checkpdf($_FILES['pdfNew']['name'])){
-            if($row['pdf']=='yes'){unlink("pdf/".$songid);}
-            else {
-                $mysqli->query('UPDATE songs SET pdf="yes"
-                           WHERE songid="'.$songid.'"');
-            }
-            move_uploaded_file($_FILES['pdfNew']['tmp_name'],"pdf/".$songid);
-        }
-        
-        if(isset($_POST['deletePdf'])){
-            unlink("pdf/".$songid);;
-            $mysqli->query('UPDATE songs SET pdf="no"
-                           WHERE songid="'.$songid.'"');
-        }
-        
-        if(isset($_POST['youtubeNew']) && $_POST['youtubeNew']!='' && $_POST['youtubeNew']!=$row['youtube']){
-            if(checkYoutube($_POST['youtubeNew'])) {
-                $mysqli->query('UPDATE songs SET youtube="'.$_POST['youtubeNew'].'"
+            
+            if($_POST['structureNew']!='null' && $_POST['structureNew']!=$row['structure']) {
+                $mysqli->query('UPDATE songs SET structure="'.$_POST['structureNew'].'"
                                WHERE songid="'.$songid.'"');
             }
-            else {
-                print('Youtube link is not valid');
+            
+            if($_POST['structureNew']=='null' && $row['structure']!=''){
+                $mysqli->query('UPDATE songs SET structure=null
+                               WHERE songid="'.$songid.'"');
+            }
+            
+            if(isset($_POST['syllablesNew']) && $_POST['syllablesNew']!=$row['syllables']) {
+                $mysqli->query('UPDATE songs SET syllables="'.$_POST['syllablesNew'].'"
+                               WHERE songid="'.$songid.'"');
+            }
+    
+            if(file_exists($_FILES['mp3New']['tmp_name'])){
+                if(checkmp3($_FILES['mp3New']['name'])){
+                    if($row['mp3']=='yes'){unlink("mp3/".$songid);}
+                    else {
+                        $mysqli->query('UPDATE songs SET mp3="yes"
+                                   WHERE songid="'.$songid.'"');
+                    }
+                    move_uploaded_file($_FILES['mp3New']['tmp_name'],"mp3/".$songid);
+                }
+                else {
+                    print('<p style="color:red"> Mp3 is not the correct file type </p>');
+                }
+            }
+            
+            if(isset($_POST['deleteMp3'])){
+                unlink("mp3/".$songid);;
+                $mysqli->query('UPDATE songs SET mp3="no"
+                               WHERE songid="'.$songid.'"');
+            }
+            
+            if(file_exists($_FILES['pdfNew']['tmp_name'])){
+                if(checkpdf($_FILES['pdfNew']['name'])){
+                    if($row['pdf']=='yes'){unlink("pdf/".$songid);}
+                    else {
+                        $mysqli->query('UPDATE songs SET pdf="yes"
+                                   WHERE songid="'.$songid.'"');
+                    }
+                    move_uploaded_file($_FILES['pdfNew']['tmp_name'],"pdf/".$songid);
+                }
+                else{
+                    print('<p style="color:red"> Pdf is not the correct file type </p>');
+                }
+            }
+            
+            if(isset($_POST['deletePdf'])){
+                unlink("pdf/".$songid);;
+                $mysqli->query('UPDATE songs SET pdf="no"
+                               WHERE songid="'.$songid.'"');
+            }
+            
+            if(isset($_POST['youtubeNew']) && $_POST['youtubeNew']!='' && $_POST['youtubeNew']!=$row['youtube']){
+                if(checkYoutube($_POST['youtubeNew'])) {
+                    $mysqli->query('UPDATE songs SET youtube="'.$_POST['youtubeNew'].'"
+                                   WHERE songid="'.$songid.'"');
+                }
+                else {
+                    print('<p style="color:red"> Youtube link is not valid </p>');
+                }
+            }
+            
+            if($_POST['keyNew']!='null' && $_POST['key2New']!='null' &&
+               ($_POST['keyNew'].' '.$_POST['key2New'])!=$row['keykey']) {
+                $mysqli->query('UPDATE songs SET keykey="'.$_POST['keyNew'].' '.$_POST['key2New'].'"
+                               WHERE songid="'.$songid.'"');
+            }
+            
+            if($_POST['keyNew']=='null' || $_POST['key2New']=='null' && $row['keykey']!=''){
+                $mysqli->query('UPDATE songs SET keykey=null
+                               WHERE songid="'.$songid.'"');
+            }
+            
+            if($_POST['soloRangeNew']!='null' && $_POST['soloRange2New']!='null' &&
+               ($_POST['soloRangeNew'].' '.$_POST['soloRange2New'])!=$row['soloRange']) {
+                $mysqli->query('UPDATE songs SET soloRange="'.$_POST['soloRangeNew'].'-'.$_POST['soloRange2New'].'"
+                               WHERE songid="'.$songid.'"');
+            }
+            
+            if($_POST['soloRangeNew']=='null' || $_POST['soloRange2New']=='null' && $row['soloRange']!=''){
+                $mysqli->query('UPDATE songs SET soloRange=null
+                               WHERE songid="'.$songid.'"');
             }
         }
-        
-        if($_POST['keyNew']!='null' && $_POST['key2New']!='null' &&
-           ($_POST['keyNew'].' '.$_POST['key2New'])!=$row['keykey']) {
-            $mysqli->query('UPDATE songs SET keykey="'.$_POST['keyNew'].' '.$_POST['key2New'].'"
-                           WHERE songid="'.$songid.'"');
-        }
-        
-        if($_POST['keyNew']=='null' || $_POST['key2New']=='null' && $row['keykey']!=''){
-            $mysqli->query('UPDATE songs SET keykey=null
-                           WHERE songid="'.$songid.'"');
-        }
-        
-        if($_POST['soloRangeNew']!='null' && $_POST['soloRange2New']!='null' &&
-           ($_POST['soloRangeNew'].' '.$_POST['soloRange2New'])!=$row['soloRange']) {
-            $mysqli->query('UPDATE songs SET soloRange="'.$_POST['soloRangeNew'].' '.$_POST['soloRange2New'].'"
-                           WHERE songid="'.$songid.'"');
-        }
-        
-        if($_POST['soloRangeNew']=='null' || $_POST['soloRange2New']=='null' && $row['soloRange']!=''){
-            $mysqli->query('UPDATE songs SET soloRange=null
-                           WHERE songid="'.$songid.'"');
-        }
-                
     }
     $songData= $mysqli->query('SELECT * FROM songs NATURAL JOIN artists NATURAL JOIN artistLink
                               WHERE songid="'.$songid.'"');
@@ -349,5 +367,6 @@
     </select>');
     //submit button 
 ?>
+Delete Song: <input type="checkbox" value="" id="deleteSong" name="deleteSong[]">
     <input type="submit" name="submitNew">
 </form>
